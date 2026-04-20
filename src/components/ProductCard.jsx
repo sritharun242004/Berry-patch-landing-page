@@ -21,7 +21,9 @@ export default function ProductCard({ name, imgSrc, comingSoon, linkTo, featured
           <span className="product-card__pill">Coming Soon</span>
         )}
         {linkTo && (
-          <span className="product-card__pill product-card__pill--live">Available Now</span>
+          <span className="product-card__pill product-card__pill--live">
+            <span className="product-card__pill-dot" />Available Now
+          </span>
         )}
         <h3 className="product-card__name">{name}</h3>
       </div>

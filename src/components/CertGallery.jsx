@@ -150,24 +150,15 @@ export default function CertGallery() {
           </button>
         )}
 
-        <div className="cert-footer">
-          <div className="cert-dots">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                className={`cert-dot ${i === activeIndex ? 'cert-dot--active' : ''}`}
-                onClick={() => goTo(i)}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
-
-          <button className="cert-view-btn" onClick={() => setLightboxOpen(true)}>
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path d="M1 1h4M1 1v4M12 1h-4M12 1v4M1 12h4M1 12v-4M12 12h-4M12 12v-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-            View Full
-          </button>
+        <div className="cert-dots" style={{marginTop: '14px', justifyContent: 'center'}}>
+          {images.map((_, i) => (
+            <button
+              key={i}
+              className={`cert-dot ${i === activeIndex ? 'cert-dot--active' : ''}`}
+              onClick={() => goTo(i)}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
         </div>
       </div>
 

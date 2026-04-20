@@ -6,7 +6,7 @@ import './Home.css'
 const products = [
   {
     name: 'Strawberry',
-    imgSrc: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=800&q=85',
+    imgSrc: 'https://images.unsplash.com/photo-1543528176-61b239494933?w=1400&q=85',
     linkTo: '/strawberry',
     featured: true,
   },

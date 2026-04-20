@@ -83,9 +83,22 @@
   padding: 4px 10px;
 }
 .product-card__pill--live {
-  color: #A8D8B0;
-  background: rgba(100, 180, 120, 0.12);
-  border-color: rgba(100, 180, 120, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #d4f0d8;
+  background: rgba(30, 80, 40, 0.72);
+  border-color: rgba(100, 180, 120, 0.3);
+  backdrop-filter: blur(6px);
+}
+
+.product-card__pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6ddc88;
+  flex-shrink: 0;
+  box-shadow: 0 0 5px rgba(109, 220, 136, 0.7);
 }
 
 .product-card__name {
@@ -96,16 +109,18 @@
   color: #fff;
   line-height: 1.05;
   letter-spacing: -0.01em;
-  overflow-wrap: break-word;
+  word-break: normal;
+  overflow-wrap: normal;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
 }
 .product-card--featured .product-card__name {
-  font-size: var(--text-3xl);
+  font-size: clamp(2rem, 7vw, 3.6rem);
 }
 
-/* Arrow button — featured card only */
+/* Arrow button — bottom-right corner */
 .product-card__arrow {
   position: absolute;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
   z-index: 1;
   width: 44px;
@@ -126,10 +141,9 @@
   transform: scale(1.08);
 }
 
-/* Larger name on featured at tablet+ */
 @media (min-width: 600px) {
   .product-card--featured .product-card__name {
-    font-size: var(--text-4xl);
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
   }
   .product-card__content {
     padding: 28px 28px;
