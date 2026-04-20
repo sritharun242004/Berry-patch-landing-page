@@ -1,0 +1,154 @@
+/* ─── DESIGN TOKENS ──────────────────────────────────────────────────── */
+:root {
+  --bg:         #F4EFE6;
+  --paper:      #FDFAF4;
+  --cream:      #E8E2D2;
+  --ink:        #1C1A16;
+  --ink-mid:    #3D3A33;
+  --forest:     #2A4A30;
+  --sage:       #637D69;
+  --sage-dark:  #3D5C44;
+  --sage-pale:  #E0EBE3;
+  --clay:       #B8623A;
+  --clay-pale:  #F6E9E2;
+  --text:       #1C1A16;
+  --text-muted: #78705F;
+  --border:     #D2CBB9;
+  --card-bg:    #FDFAF4;
+
+  /* Fluid type — Utopia (375→1440) */
+  --text-2xs: clamp(0.625rem, 0.60rem + 0.11vw, 0.688rem);
+  --text-xs:  clamp(0.75rem,  0.72rem + 0.18vw, 0.875rem);
+  --text-sm:  clamp(0.875rem, 0.84rem + 0.24vw, 1rem);
+  --text-md:  clamp(1rem,     0.95rem + 0.28vw, 1.125rem);
+  --text-lg:  clamp(1.125rem, 1.04rem + 0.44vw, 1.35rem);
+  --text-xl:  clamp(1.35rem,  1.18rem + 0.77vw, 1.8rem);
+  --text-2xl: clamp(1.8rem,   1.49rem + 1.43vw, 2.4rem);
+  --text-3xl: clamp(2.2rem,   1.7rem  + 2.5vw,  3.6rem);
+  --text-4xl: clamp(3rem,     2rem    + 4.5vw,  6.5rem);
+  --text-hero:clamp(3.8rem,   1.5rem  + 11vw,  10rem);
+
+  /* Fluid space */
+  --space-2xs: clamp(0.25rem, 0.22rem + 0.15vw, 0.375rem);
+  --space-xs:  clamp(0.5rem,  0.44rem + 0.3vw,  0.75rem);
+  --space-sm:  clamp(0.75rem, 0.67rem + 0.4vw,  1rem);
+  --space-md:  clamp(1rem,    0.88rem + 0.6vw,  1.5rem);
+  --space-lg:  clamp(1.5rem,  1.2rem  + 1vw,    2.5rem);
+  --space-xl:  clamp(2.5rem,  1.8rem  + 2.5vw,  5rem);
+  --space-2xl: clamp(4rem,    2.5rem  + 5vw,    9rem);
+
+  --font-display: 'Gloock', Georgia, serif;
+  --font-body:    'Outfit', system-ui, sans-serif;
+}
+
+/* ─── RESET ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--text-md);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+/* ─── MARQUEE ────────────────────────────────────────────────────────── */
+.marquee {
+  --duration: 38s;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image:         linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: marquee-scroll var(--duration) linear infinite;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+.marquee__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 0 var(--space-lg);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── SCROLL ANIMATIONS ──────────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; translate: 0 2.5rem; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@supports (animation-timeline: view()) {
+  .anim-fade-up {
+    animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+  .anim-fade-in {
+    animation: fade-in 0.9s ease both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 25%;
+  }
+}
+@supports not (animation-timeline: view()) {
+  .anim-fade-up, .anim-fade-in {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .anim-fade-up.visible, .anim-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── WAVE DIVIDER ───────────────────────────────────────────────────── */
+.wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; }
+.wave-divider svg { display: block; width: 100%; height: clamp(30px, 5vw, 70px); }
+
+/* ─── SHARED ─────────────────────────────────────────────────────────── */
+.eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin-bottom: var(--space-xs);
+}
+.eyebrow--light { color: rgba(255,255,255,0.45); }
+.eyebrow--sage  { color: var(--sage); }
+
+/* ─── KEYFRAMES ──────────────────────────────────────────────────────── */
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+@keyframes hero-in {
+  from { opacity: 0; translate: 0 3rem; }
+  to   { opacity: 1; translate: 0 0; }
+}
